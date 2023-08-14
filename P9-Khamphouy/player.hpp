@@ -15,8 +15,9 @@ private:
 public:
     string pName;
     ECcolor pColor;
-    Player(string name, ECcolor color): pName(name), pColor(color){ }
-    ~Player() = default;
+    Player(string name, ECcolor color): pName(name), pColor(color){}
+    ~Player() =default;
+    string name() const {return pName; }
     ECcolor color() const { return pColor;}
     int score() const { return columnScore;}
     bool wonColumn (int colNum);
@@ -25,3 +26,4 @@ public:
 inline ostream& operator <<(ostream& os, Player& p){ return p.print(os);}
 
 #endif /* player_hpp */
+

@@ -5,7 +5,7 @@
 #define column_hpp
 
 #include "player.hpp"
-using spt = shared_ptr<Player>;
+using sharedpt = shared_ptr<Player>;
 class Column{
 private:
     constexpr static const int columns[ 13 ]= { 0, 0, 3, 5, 7, 9, 11, 13,
@@ -17,17 +17,21 @@ private:
     ECcolor playCol;
     int cLen;
 public:
+    static int colCt;
     Column() = default;
-    Column(int cn): cNum(cn),cState(ECcolumn::Available), cLen(columns[cn]){}
-    ~Column() = default;
+    Column(int cn): cNum(cn),cState(ECcolumn::Available), cLen(columns[cn]){
+        colCt++;
+    }
+    ~Column() {colCt--;cerr << "Col Deallocated:" <<colCt <<"\n"; };
     ECcolumn colState() const{ return cState; }
-    bool startTower( spt p );
+    bool startTower( sharedpt p );
     bool move();
     bool towInCol();
-    void stop( spt p );
+    void stop( sharedpt p );
     void bust();
     ostream& print(ostream& os) const;
 };
 inline ostream& operator <<(ostream& os, Column& c){ return c.print(os);}
 
 #endif /* column_hpp */
+

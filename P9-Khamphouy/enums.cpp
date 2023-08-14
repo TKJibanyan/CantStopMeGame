@@ -6,4 +6,6 @@
 const string words[5] = {"White ", "Orange", "Yellow", "Green ", "Blue  "};
 const string colString[3] = {"Captured ", "Pending  ", "Available"};
 const string begLet[5] = {"T", "O", "Y", "G", "B"};
+const string status[3] = {"Begun", "Done ", "Quit "};
 const char dieLet[4] = {'A', 'B', 'C' , 'D'};
+

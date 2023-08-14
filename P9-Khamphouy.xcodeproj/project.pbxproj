@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		784D6E6B2A8A7ED900537694 /* badplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 784D6E682A8A7ED900537694 /* badplayer.cpp */; };
+		784D6E6C2A8A7ED900537694 /* badchoice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 784D6E692A8A7ED900537694 /* badchoice.cpp */; };
 		787B70E529E475A9007AB2AF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 787B70E429E475A9007AB2AF /* main.cpp */; };
-		787B70FB29E475FA007AB2AF /* clist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 787B70EB29E475F9007AB2AF /* clist.cpp */; };
 		787B70FC29E475FA007AB2AF /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 787B70EC29E475F9007AB2AF /* player.cpp */; };
 		787B70FD29E475FA007AB2AF /* dice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 787B70EE29E475F9007AB2AF /* dice.cpp */; };
 		787B70FE29E475FA007AB2AF /* column.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 787B70F029E475FA007AB2AF /* column.cpp */; };
@@ -31,9 +32,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		784D6E672A8A7ED900537694 /* badchoice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = badchoice.hpp; sourceTree = "<group>"; };
+		784D6E682A8A7ED900537694 /* badplayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = badplayer.cpp; sourceTree = "<group>"; };
+		784D6E692A8A7ED900537694 /* badchoice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = badchoice.cpp; sourceTree = "<group>"; };
+		784D6E6A2A8A7ED900537694 /* badplayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = badplayer.hpp; sourceTree = "<group>"; };
 		787B70E129E475A9007AB2AF /* P9-Khamphouy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "P9-Khamphouy"; sourceTree = BUILT_PRODUCTS_DIR; };
 		787B70E429E475A9007AB2AF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		787B70EB29E475F9007AB2AF /* clist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clist.cpp; sourceTree = "<group>"; };
 		787B70EC29E475F9007AB2AF /* player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
 		787B70ED29E475F9007AB2AF /* column.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = column.hpp; sourceTree = "<group>"; };
 		787B70EE29E475F9007AB2AF /* dice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dice.cpp; sourceTree = "<group>"; };
@@ -84,7 +88,6 @@
 				787B70E429E475A9007AB2AF /* main.cpp */,
 				787B70F629E475FA007AB2AF /* board.cpp */,
 				787B70F229E475FA007AB2AF /* board.hpp */,
-				787B70EB29E475F9007AB2AF /* clist.cpp */,
 				787B70EF29E475F9007AB2AF /* clist.hpp */,
 				787B70F029E475FA007AB2AF /* column.cpp */,
 				787B70ED29E475F9007AB2AF /* column.hpp */,
@@ -98,6 +101,10 @@
 				787B70F729E475FA007AB2AF /* player.hpp */,
 				787B70F829E475FA007AB2AF /* tools.cpp */,
 				787B70F929E475FA007AB2AF /* tools.hpp */,
+				784D6E692A8A7ED900537694 /* badchoice.cpp */,
+				784D6E672A8A7ED900537694 /* badchoice.hpp */,
+				784D6E682A8A7ED900537694 /* badplayer.cpp */,
+				784D6E6A2A8A7ED900537694 /* badplayer.hpp */,
 			);
 			path = "P9-Khamphouy";
 			sourceTree = "<group>";
@@ -159,11 +166,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				784D6E6C2A8A7ED900537694 /* badchoice.cpp in Sources */,
 				787B70FE29E475FA007AB2AF /* column.cpp in Sources */,
 				787B70E529E475A9007AB2AF /* main.cpp in Sources */,
-				787B70FB29E475FA007AB2AF /* clist.cpp in Sources */,
 				787B710129E475FA007AB2AF /* tools.cpp in Sources */,
 				787B70FD29E475FA007AB2AF /* dice.cpp in Sources */,
+				784D6E6B2A8A7ED900537694 /* badplayer.cpp in Sources */,
 				787B710229E475FA007AB2AF /* enums.cpp in Sources */,
 				787B710029E475FA007AB2AF /* board.cpp in Sources */,
 				787B70FC29E475FA007AB2AF /* player.cpp in Sources */,

@@ -10,29 +10,32 @@
 class Game {
 private:
     int playNum;
-    unique_ptr<Dice> fourDie;
-    spt users[3] = {};
-    unique_ptr<Board> board;
-    unique_ptr<CList<spt>> clst;
-    bool avalCol[5];
+    int in;
+    int rollVal = 0;
+    ifstream fRoll;
+    unique_ptr<Dice> fourDice;
+    Board board;
+    CList<sharedpt> clst;
+    EStatus stat;
+    void checkInput();
 public:
-    Game():fourDie(new FakeDice()), board(new Board()),
-    clst(new CList<spt>()){
+    Game():fourDice(new FakeDice()), board(Board()),
+    clst(CList<sharedpt>()){
         getNewPlayer();
-        clst->init();
+        fRoll.open("fakeRoll.txt", ifstream::in);
     }
-    ~Game() = default; //Dont need to call delete
+    ~Game() {fRoll.close();} //Dont need to call delete
     void getNewPlayer();
-    spt getPlay(){return clst->nextPlayer();}
-    // ---------------------------------------------------------------------------
+    sharedpt getPlay() {return clst()->pData;}
+    // ------------------------------------------------------------------------
     // Testing functions to interact with other classes
-    void rollDie();   //rolls die
-    void printName();  //prints player name and color
-    void oneTurn(spt p);
-    void startPlay();
-    void stopPlay();
-    void moveTow(int a); //moves tower
-    void printCol(); //prints columns
+    void rollDice();   //rolls die
+    bool won(){if(clst.next()->pData->score() == 3) return true;
+        return false;}
+    bool empty(){if(clst.empty())return true; return false;}
+    void oneTurn(sharedpt p);
+    void play();
 };
 
 #endif /* game_hpp */
+

@@ -2,10 +2,11 @@
 //  P3-Khamphouy
 //  Created by Tony Khamphouy on 2/5/23.
 #include "column.hpp"
+int Column::colCt=0;
 // --------------------------------------------------------------------------
 //  Places a tower. Moves tower to tile to capture column
 bool
-Column :: startTower( spt p ){
+Column :: startTower( sharedpt p ){
     playCol = p->color(); //Used to save player color to use in print();
     if(cState != ECcolumn::Available) return false;
     if(colPos[(int)p->color()] == 0){
@@ -23,7 +24,7 @@ Column :: startTower( spt p ){
 //  Moves the tower 1 square forward.
 bool
 Column :: move(){
-    if(colPos[0] >=1 && cState != ECcolumn::Pending){
+    if(towInCol() && cState != ECcolumn::Pending){
         colPos[0] = colPos[0] + 1;
         if(colPos[0] == cLen){
             cState = ECcolumn::Pending;
@@ -35,7 +36,7 @@ Column :: move(){
 // --------------------------------------------------------------------------
 //  Stops the players turn
 void
-Column :: stop( spt p){
+Column :: stop( sharedpt p){
     colPos[(int)p->color()] = colPos[0];
     colPos[0] = 0;
     if(colState() == ECcolumn::Pending){
@@ -52,7 +53,8 @@ Column :: towInCol(){
     }
     return true;
 }
-
+// --------------------------------------------------------------------------
+//  resets all towers and tiles
 void
 Column :: bust(){
     colPos[(int)playCol] = 0;
@@ -62,13 +64,22 @@ Column :: bust(){
 //  Prints
 ostream&
 Column :: print(ostream& os) const{
-    os << cNum <<" " << colString[(int)colState()] << " ";
+    os <<left <<setw(12) << cNum << colString[(int)colState()] << "\t";
     for(int k = 1; k <= cLen; k++){
         if(k == colPos[0]){
             os << "T";
         }
-        else if(k == colPos[(int)playCol]){
-            os << begLet[(int)playCol];
+        else if(k == colPos[1]){
+            os << begLet[1];
+        }
+        else if(k == colPos[2]){
+            os << begLet[2];
+        }
+        else if(k == colPos[3]){
+            os << begLet[3];
+        }
+        else if(k == colPos[4]){
+            os << begLet[4];
         }
         else{
             os << "-";
@@ -76,5 +87,6 @@ Column :: print(ostream& os) const{
     }
     return os;
 }
+
 
 

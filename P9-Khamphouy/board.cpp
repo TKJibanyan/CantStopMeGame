@@ -3,28 +3,31 @@
 //  Created by Tony Khamphouy on 2/20/23.
 #include "board.hpp"
 // --------------------------------------------------------------------------
+//  constructor assigns backbone
+Board :: Board():backBone{nullptr}{
+    for(int k = 2; k <= 12; k++){
+        backBone[k] = upi(new Column(k));
+    }
+}
+// --------------------------------------------------------------------------
 //  Starts new player turn
 void
-Board :: startTurn(spt p){
+Board :: startTurn(sharedpt p){
     currP = p;
     tCount = 0;
-    for(int k = 0; k < 3; k++){
-        towInCol[k] = 0;
-    }
 }
 // --------------------------------------------------------------------------
 //  Moves tower one slot if available
 bool
 Board :: move(int col){
     if(backBone[col]->colState() != ECcolumn::Available ) return false;
-    if(tCount == 3 && backBone[col]->towInCol() == false) return false;
-    if(backBone[col]->towInCol() == true){
+    if(tCount == 3 && !backBone[col]->towInCol()) return false;
+    if(backBone[col]->towInCol()){
         backBone[col]->move();
     }
     else{
-        tCount++;
-        towInCol[tCount-1] = col;
-        backBone[col]->startTower(currP);
+        towInCol[tCount++] = col;
+        backBone[towInCol[tCount-1]]->startTower(currP);
     }
     return true;
 }
@@ -32,29 +35,17 @@ Board :: move(int col){
 //  Stops the players turn
 void
 Board :: stop(){
-    for(int k = 0; k < 3; k++){
-        switch (towInCol[k]){
-            case 0:
-                cout << "No tower in Column\n";
-                break;
-            default:
-                backBone[towInCol[k]]->stop(currP);
-        }
+    for(int k = 0; k < tCount; k++){
+        backBone[towInCol[k]]->stop(currP);
     }
 }
 // --------------------------------------------------------------------------
 //  Bust all the towers in column;
 void
 Board :: bust(){
-    cout << "Busted!\n";
-    for(int k = 0; k < 3; k++){
-        switch (towInCol[k]){
-            case 0:
-                cout << "No tower in Column\n";
-                break;
-            default:
-                backBone[towInCol[k]]->bust();
-        }
+    cout << "\nBusted!\n";
+    for(int k = 0; k < tCount; k++){
+        backBone[towInCol[k]]->bust();
     }
 }
 // --------------------------------------------------------------------------
@@ -66,3 +57,4 @@ Board :: print(ostream& os) const{
     }
     return os;
 }
+

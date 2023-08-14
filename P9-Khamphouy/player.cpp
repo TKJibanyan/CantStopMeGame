@@ -2,7 +2,6 @@
 //  P2-Khamphouy
 //  Created by Tony Khamphouy on 1/26/23.
 #include "player.hpp"
-
 // --------------------------------------------------------------------------
 //  Increase Score, determine if player won
 bool
@@ -32,4 +31,5 @@ Player :: print(ostream& os) const{
     os <<"]\n";
     return os;
 }
+
 

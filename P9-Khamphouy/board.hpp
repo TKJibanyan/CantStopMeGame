@@ -12,15 +12,10 @@ private:
     int tCount = 0;
     int towInCol[3] = {};
     upi backBone[13];
-    spt currP;
+    sharedpt currP;
 public:
-    Board():backBone{nullptr} {
-        for(int k = 2; k <= 12; k++){
-            backBone[k] = upi(new Column(k));
-        }
-    }
-    ~Board() = default;
-    void startTurn(spt p);
+    Board();
+    void startTurn(sharedpt p);
     bool move(int col);
     void stop();
     void bust();

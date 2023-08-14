@@ -1,6 +1,6 @@
 //  main.cpp
-//  P9-Khamphouy
-//  Created by Tony Khamphouy on 4/10/23.
+//  P11-Khamphouy
+//  Created by Tony Khamphouy on 5/1/23.
 #include "game.hpp"
 void testGame(Game* g);
 int main(int argc, const char * argv[]) {
@@ -12,6 +12,6 @@ int main(int argc, const char * argv[]) {
 }
 
 void testGame( Game* g ){
-    g->oneTurn(g->getPlay());
-    //g->oneTurn(g->getPlay());
+    g->play();
 }
+

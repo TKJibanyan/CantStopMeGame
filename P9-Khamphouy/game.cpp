@@ -6,85 +6,89 @@
 // Use to add a new player with name and color
 void
 Game :: getNewPlayer(){
-    cout <<"How many players will play. Choose from 2-4: ";
-    cin >> playNum;
-    while( playNum < 2 || playNum > 4 ){
+    do{
         cout <<"How many players will play. Choose from 2-4: ";
         cin >> playNum;
-    }
+    }while(playNum < 2 || playNum > 4);
     for( int j = 0; j < playNum; j++ ){
-        clst->addCell(clst->next());
+        clst.addCell(clst.next());
     }
+    clst.init();
 }
 // ---------------------------------------------------------------------------
 // One turn of the game
 void
-Game :: oneTurn(spt p){
-    int in = 0;
-    int fP = 0;
-    int sP = 0;
-    board->startTurn(p);
-    cout << *p;
-    string menu = "\nWould you like to: Roll[1], Stop[2], Or Resign[3]\n";
-    for(;;){
-        cout << menu;
-        cin >> in;
-        switch(in){
-            case 1:
-                fP = *fourDie->roll();
-                sP = fourDie->sPair();
-                if(board->move(fP) == false && board->move(sP) == false){
-                    board->bust();
+Game :: oneTurn(sharedpt p){
+    int fP, sP = 0;
+    bool success = false;
+    board.startTurn(p);
+    cout << "\n\nCurrent Player:\t" << *p;
+    while(success != true){
+        try{
+            cout << "\nWould you like to: Roll[1], Stop[2], Or Resign[3]\n";
+            //cin >> in; //uncomment to play fake game
+            fRoll >> rollVal; //comment out to use real dice
+            cout << rollVal << "\n"; // comment out to use real dice
+            checkInput();
+            switch(rollVal){ //chance rollVal to in
+                case 1:
+                    fP = *fourDice->roll();
+                    sP = fourDice->sPair();
+                    if(board.move(fP) == false && board.move(sP) == false){
+                        board.bust();
+                        break;
+                    }
+                    board.move(sP);
+                    cout << "\n" << board << "\n";
+                    continue;
+                case 2:
+                    board.stop();
+                    cout << "\n" << board << "\n";
                     break;
-                }
-                moveTow(sP);
-                printCol();
-                continue;
-            case 2:
-                board->stop();
-                printCol();
-                break;
-            case 3:
-                clst->remove();
-                break;
+                case 3:
+                    clst.remove();
+                    break;
+            }
+            success = true;
+            break;
         }
-        break;
+        catch (BadChoice& bc){bc.print();}
     }
+}
+// --------------------------------------------------------------------------
+//  Plays whole game
+void
+Game :: play(){
+    stat = EStatus::Begun;
+    cout <<status[0] << "\n";
+    for(;;){
+        if(empty()){
+            stat = EStatus::Quit;
+            cout << "\n" <<status[(int)stat] << "\n";
+            break;
+        }
+        if(won()){
+            stat = EStatus::Done;
+            cout << clst;
+            cout << "\n" <<status[(int)stat] << "\n";
+            break;
+        }
+        oneTurn(getPlay());
+    }
+}
+// ---------------------------------------------------------------------------
+// checks input from player
+void
+Game :: checkInput(){
+    //if(in < 1 || in > 3) throw BadChoice(); //uncomment to play real game
+    if(rollVal < 1 || rollVal > 3) throw BadChoice(); //comment to play real
 }
 // ---------------------------------------------------------------------------
 // Use to call the roll function from Dice and print
 void
-Game :: rollDie(){
-    fourDie->roll();
-    cout << *fourDie << "\n";
+Game :: rollDice(){
+    fourDice->roll();
+    cout << *fourDice << "\n";
 }
-// ---------------------------------------------------------------------------
-// Use to call the print function from Player
-void
-Game :: printName(){
-    cout << *clst << "\n";
-}
-// ---------------------------------------------------------------------------
-// Delegation calling from board to start
-void
-Game :: startPlay(){
-    board->startTurn(users[0]);
-}
-// ---------------------------------------------------------------------------
-// Use to call the move function from Column
-void
-Game :: moveTow(int a){
-    board->move(a);
-}
-// ---------------------------------------------------------------------------
-// Delegation calling stop from board
-void
-Game :: stopPlay(){
-    board->stop();
-}
-// ---------------------------------------------------------------------------
-// Use to call the print function from Column
-void
-Game :: printCol(){
-    cout << "\n" << *board << "\n";
-}
+
+

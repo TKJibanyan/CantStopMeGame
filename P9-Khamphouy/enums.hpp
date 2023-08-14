@@ -8,9 +8,12 @@
 
 enum class ECcolor {White=0, Orange, Yellow, Green, Blue};
 enum class ECcolumn {Captured = 0, Pending, Available};
+enum class EStatus {Begun = 0, Done, Quit};
 extern const string words[5];
 extern const string colString[3];
 extern const string begLet[5];
+extern const string status[3];
 extern const char dieLet[4];
 
 #endif /* enums_hpp */
+
